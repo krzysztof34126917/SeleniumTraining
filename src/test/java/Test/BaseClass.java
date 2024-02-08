@@ -1,21 +1,24 @@
 package Test;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
-public class BaseClass {
+public abstract class BaseClass {
     FirefoxOptions options = new FirefoxOptions();
     public static FirefoxDriver driver = new FirefoxDriver();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofMillis(10000));
 
     @BeforeSuite
     public void beforeSuite() {
 //        options.addArguments("-headless");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
+//        driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
     }
 
     @AfterSuite
