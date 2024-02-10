@@ -1,5 +1,6 @@
 package Test;
 
+import Interface.IGenericMethods;
 import Page.PageObject.DynamicLoadingPage;
 import Page.PageObject.HerokuMainPage;
 import org.openqa.selenium.By;
@@ -9,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class FirstClass extends BaseClass{
+public class FirstClass extends BaseClass {
     HerokuMainPage mainPage = new HerokuMainPage(driver);
     @Test
     public void withStandardLocatorsTest() {
@@ -45,5 +46,27 @@ public class FirstClass extends BaseClass{
                 .waitForElement(DynamicLoadingPage.TXT_HELLO_WORLD)
                 .getText(DynamicLoadingPage.TXT_HELLO_WORLD);
         System.out.println("The text is " + txt);
+    }
+
+    @Test
+    public void javaScriptAlerts() {
+        driver.get("https://the-internet.herokuapp.com/");
+        String myText = "This is my text";
+        mainPage
+                .goToJavaScriptAlertsPage()
+                .clickBtnJsAlert()
+                .acceptAlert()
+                .checkResult("You successfully clicked an alert")
+                .clickBtnJsAlertChoice()
+                .dismissAlert()
+                .checkResult("You clicked: Cancel")
+                .clickBtnJsAlertChoice()
+                .acceptAlert()
+                .checkResult("You clicked: Ok")
+                .clickBtnJsPrompt()
+                .sendKeysAlert(myText)
+                .acceptAlert()
+                .checkResult("You entered: " + myText);
+        System.out.println("Test finished");
     }
 }

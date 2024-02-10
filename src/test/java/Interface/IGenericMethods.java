@@ -22,4 +22,16 @@ public interface IGenericMethods<T> {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return getInstance();
     }
+    default T acceptAlert() {
+        driver.switchTo().alert().accept();
+        return getInstance();
+    }
+    default T dismissAlert() {
+        driver.switchTo().alert().dismiss();
+        return getInstance();
+    }
+    default T sendKeysAlert(String text) {
+        driver.switchTo().alert().sendKeys(text);
+        return getInstance();
+    }
 }
