@@ -1,5 +1,6 @@
 package Test;
 
+import Interface.IGenericMethods;
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -8,6 +9,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public abstract class BaseClass {
     FirefoxOptions options = new FirefoxOptions();
@@ -18,7 +20,7 @@ public abstract class BaseClass {
     public void beforeSuite() {
 //        options.addArguments("-headless");
         driver.manage().window().maximize();
-//        driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
     }
 
     @AfterSuite
